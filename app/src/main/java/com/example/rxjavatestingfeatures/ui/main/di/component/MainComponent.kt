@@ -1,6 +1,6 @@
-package com.example.rxjavatestingfeatures.ui.di.component
+package com.example.rxjavatestingfeatures.ui.main.di.component
 
-import com.example.rxjavatestingfeatures.ui.MainActivity
+import com.example.rxjavatestingfeatures.ui.main.MainActivity
 import dagger.Subcomponent
 
 @Subcomponent

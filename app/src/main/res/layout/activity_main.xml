@@ -4,19 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="mainViewModel"
+            type="com.example.rxjavatestingfeatures.ui.main.MainViewModel" />
     </data>
 
-    <FrameLayout
-
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray">
+        android:background="@color/gray"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleview_main_top_rated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/movie_item_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleview_all"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -27,8 +40,10 @@
             android:id="@+id/main_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:visibleGone="@{mainViewModel.isLoadingProgressBar().booleanValue()}" />
 
-    </FrameLayout>
+    </RelativeLayout>
 </layout>

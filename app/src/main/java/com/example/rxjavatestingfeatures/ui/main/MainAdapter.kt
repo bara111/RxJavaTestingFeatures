@@ -1,4 +1,4 @@
-package com.example.rxjavatestingfeatures.ui
+package com.example.rxjavatestingfeatures.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,9 +11,13 @@ import com.example.rxjavatestingfeatures.databinding.MovieItemLayoutBinding
 
 class MainAdapter(
     var itemClick: (Movie) -> Unit
-) : ListAdapter<Movie, MainAdapter.DetailsViewHolder>(WeatherDC()) {
+) : ListAdapter<Movie, MainAdapter.DetailsViewHolder>(
+    WeatherDC()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {
-        return DetailsViewHolder.from(parent).apply {
+        return DetailsViewHolder.from(
+            parent
+        ).apply {
             itemView.setOnClickListener {
                 itemClick(getItem(adapterPosition))
             }
@@ -24,7 +28,7 @@ class MainAdapter(
         holder.bind(getItem(position))
 
     class DetailsViewHolder(
-        val binding: MovieItemLayoutBinding
+        private val binding: MovieItemLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Movie) {
             with(binding) {
@@ -37,7 +41,9 @@ class MainAdapter(
             fun from(parent: ViewGroup): DetailsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = MovieItemLayoutBinding.inflate(layoutInflater, parent, false)
-                return DetailsViewHolder(binding)
+                return DetailsViewHolder(
+                    binding
+                )
             }
         }
     }

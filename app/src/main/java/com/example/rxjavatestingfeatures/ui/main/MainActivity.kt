@@ -1,7 +1,6 @@
-package com.example.rxjavatestingfeatures.ui
+package com.example.rxjavatestingfeatures.ui.main
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -16,7 +15,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainAdapter: MainAdapter
+    private lateinit var topRatedAdapter: MainAdapter
+    private lateinit var popularAdapter: MainAdapter
     private val viewModel by viewModels<MainViewModel> {
         viewModelFactory
     }
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             R.layout.activity_main
         ).apply {
             lifecycleOwner = this@MainActivity
+            mainViewModel = viewModel
         }
 
         initViews()
@@ -37,18 +38,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.moviesData.observe(this, Observer {
-            mainAdapter.submitList(it.results)
-            binding.mainProgress.visibility=View.GONE
-        })
+        with(viewModel) {
+            moviesTopRatedData.observe(this@MainActivity, Observer {
+                topRatedAdapter.submitList(it)
+            })
+
+            moviesPopularData.observe(this@MainActivity, Observer {
+                popularAdapter.submitList(it)
+            })
+        }
+
     }
 
     private fun initViews() {
-        mainAdapter = MainAdapter {
+        topRatedAdapter = MainAdapter {
         }
-
+        popularAdapter = MainAdapter {
+        }
+        with(binding.recycleviewMainTopRated) {
+            adapter = topRatedAdapter
+            hasFixedSize()
+        }
         with(binding.recycleviewAll) {
-            adapter = mainAdapter
+            adapter = popularAdapter
             hasFixedSize()
         }
 

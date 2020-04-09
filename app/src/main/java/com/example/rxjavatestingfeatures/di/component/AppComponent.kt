@@ -1,12 +1,11 @@
 package com.example.rxjavatestingfeatures.di.component
 
 import android.content.Context
-import androidx.core.view.KeyEventDispatcher
-import com.example.rxjavatestingfeatures.di.module.MainViewModelModule
-import com.example.rxjavatestingfeatures.di.module.ViewModelFactoryModule
 import com.example.rxjavatestingfeatures.di.AppSubComponents
-import com.example.rxjavatestingfeatures.ui.di.component.MainComponent
+import com.example.rxjavatestingfeatures.di.module.MainViewModelModule
 import com.example.rxjavatestingfeatures.di.module.RetrofitModule
+import com.example.rxjavatestingfeatures.di.module.ViewModelFactoryModule
+import com.example.rxjavatestingfeatures.ui.main.di.component.MainComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -18,5 +17,6 @@ interface AppComponent {
     interface Factory {
         fun create(@BindsInstance context: Context): AppComponent
     }
+
     fun mainComponent(): MainComponent.Factory
 }
